@@ -1,9 +1,11 @@
-from fastapi import APIRouter, HTTPException, status, Depends, UploadFile, File, Form
+from fastapi import (APIRouter, HTTPException, status, Depends, UploadFile,
+                     File, Form)
 from sqlalchemy.orm import Session
 from typing import Optional
 from app.models.schemas import UserProfile, RoadmapResponse
 from app.services.agent_service import AgentWorkflow
-from app.services.document_parser_service import extract_resume_text, extract_jd_text_from_file
+from app.services.document_parser_service import (extract_resume_text,
+                                                 extract_jd_text_from_file)
 from app.services.job_fetcher_service import fetch_job_description
 from app.db.session import get_session
 from app.db import models as db_models
@@ -12,6 +14,7 @@ import json
 import os
 
 router = APIRouter()
+
 
 @router.post("/generate-roadmap", response_model=RoadmapResponse, status_code=status.HTTP_200_OK)
 async def generate_roadmap(profile: UserProfile, db: Session = Depends(get_session)):
